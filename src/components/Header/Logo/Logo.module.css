@@ -1,0 +1,27 @@
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: 2px solid transparent;
+  border-radius: 50%;
+  outline-offset: 2px;
+  height: 32px;
+  width: 32px;
+  transition: outline-color 0.36s ease-in-out;
+}
+
+.logo {
+  height: 175%;
+  object-fit: cover;
+}
+
+.link:hover {
+  outline-color: var(--reactColor);
+}
+
+.link:focus {
+  outline-color: var(--reactColor);
+}
+.link:active {
+  outline-color: var(--reactColor);
+}
