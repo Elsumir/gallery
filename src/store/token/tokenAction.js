@@ -34,28 +34,19 @@ export const tokenRequestError = (code) => ({
 
 export const deleteToken = () => ({
   type: DELETE_TOKEN,
-  code: '',
+  token: '',
 });
-// export const tokenReduceAsync = async (code) => {
-//   const url = new URL(API_URL_TOKEN);
-//   url.searchParams.append('client_id', ACCESS_KEY);
-//   url.searchParams.append('client_secret', SECRET_KEY);
-//   url.searchParams.append('redirect_uri', REDIRECT_URI);
-//   url.searchParams.append('code', code);
-//   url.searchParams.append('grant_type', 'authorization_code');
-//   return axios(url, {method: 'POST'}).then((data) => data);
-// };
 
 export const tokenReduceAsync = () => (dispatch, getState) => {
   const code = getState().token.code;
-  if (!code) return;
+  const token = getState().token.token;
+  if (!code || token) return;
   const url = new URL(API_URL_TOKEN);
   url.searchParams.append('client_id', ACCESS_KEY);
   url.searchParams.append('client_secret', SECRET_KEY);
   url.searchParams.append('redirect_uri', REDIRECT_URI);
   url.searchParams.append('code', code);
   url.searchParams.append('grant_type', 'authorization_code');
-  console.log(url.href);
 
   dispatch(tokenRequest());
   axios(url.href, {method: 'POST'})
@@ -70,7 +61,6 @@ export const tokenReduceAsync = () => (dispatch, getState) => {
 };
 
 export const tokenMiddleware = (store) => (next) => (action) => {
-  console.log(action);
   if (action.type === UPDATE_CODE) {
     getCode(action.code);
   }

@@ -7,11 +7,6 @@ import {ReactComponent as Heart} from './img/24037.svg';
 export const Card = ({data}) => {
   const date = data.date.split('T')[0];
 
-  // const date = data.date
-  //   .split('')
-  //   .join()
-  //   .replaceAll(/T|Z|/g, ',')
-  //   .replaceAll(',', '');
   return (
     <Text As="a" href="/" className={style.linkImage}>
       <div className={style.content}>

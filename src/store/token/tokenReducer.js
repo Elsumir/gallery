@@ -4,7 +4,7 @@ const initialState = {
   code: getCode(),
   loading: false,
   token: getToken(),
-  cullFunc: true,
+  cullFunc: false,
 };
 
 const DELETE_TOKEN = 'DELETE_TOKEN';
@@ -25,7 +25,7 @@ export const tokenReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         token: action.token,
-        cullFunc: false,
+        cullFunc: true,
       };
     case TOKEN_REQUEST_ERROR:
       return {

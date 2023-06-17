@@ -1,115 +1,14 @@
+import {Card} from './Card/Card';
 import style from './Main.module.css';
-import img from './img/notphoto.jpg';
-
+// import {useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 export const Main = () => {
-  console.log();
+  const data = useSelector((state) => state.data.data);
   return (
     <div className={style.gallery}>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
-      <a className={style.linkImage}>
-        <img className={style.img} src={img} />
-      </a>
+      {data.map((data) => (
+        <Card key={data.id} data={data} />
+      ))}
     </div>
   );
 };

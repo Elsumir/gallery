@@ -7,6 +7,7 @@ export const Text = (prop) => {
     As = 'span',
     color = 'black',
     fw = 'medium',
+    target = '_self',
     size,
     tsize,
     dsize,
@@ -27,7 +28,7 @@ export const Text = (prop) => {
     {[style[`fst${dsize}`]]: dsize}
   );
   return (
-    <As className={classes} href={href} onClick={onClick}>
+    <As className={classes} target={target} href={href} onClick={onClick}>
       {children}
     </As>
   );
@@ -43,4 +44,5 @@ Text.propTypes = {
   children: PropTypes.any,
   href: PropTypes.string,
   center: PropTypes.bool,
+  target: PropTypes.string,
 };
