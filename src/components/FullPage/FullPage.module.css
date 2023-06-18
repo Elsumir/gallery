@@ -40,6 +40,10 @@
   justify-content: center;
 }
 
+.likes {
+  cursor: pointer;
+}
+
 .countLike {
   position: absolute;
   color: #000;
