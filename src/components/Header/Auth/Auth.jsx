@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {authRequestAsync} from '../../../store/auth/authAction';
 import {useState} from 'react';
 import {deleteToken} from '../../../store/token/tokenAction';
+import {useNavigate} from 'react-router-dom';
 
 export const Auth = () => {
   useToken();
@@ -16,6 +17,7 @@ export const Auth = () => {
   const name = useSelector((state) => state.auth.name);
   const [btnClose, setBtnClose] = useState('dnone');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   console.log(token);
 
   if (token) {
@@ -30,9 +32,21 @@ export const Auth = () => {
     setBtnClose(btnClose === 'dnone' ? 'logout' : 'dnone');
   };
 
+  const back = () => {
+    navigate(-1);
+  };
+
+  const url = window.location.href.includes('cart');
+  // const toggleClass = url ? 'dnone' : 'logo';
+  console.log(url);
+
   return (
     <>
-      {token ? (
+      {url ? (
+        <Text As="a" onClick={back} className={style.authName}>
+          {'назад'}
+        </Text>
+      ) : token ? (
         <>
           <Text As="a" onClick={toggleBtn} className={style.authName}>
             {name}

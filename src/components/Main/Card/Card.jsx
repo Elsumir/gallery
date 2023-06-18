@@ -3,12 +3,15 @@ import {Text} from '../../../ui/Text';
 import PropTypes from 'prop-types';
 // import img from './img/notphoto.jpg';
 import {ReactComponent as Heart} from './img/24037.svg';
+import {Link} from 'react-router-dom';
 // .replaceAll(/a-z,A-Z/g, '')
 export const Card = ({data}) => {
   const date = data.date.split('T')[0];
 
+  const id = data.id;
+
   return (
-    <Text As="a" href="/" className={style.linkImage}>
+    <Link className={style.linkImage} to={`/cart/${id}`}>
       <div className={style.content}>
         <div className={style.userInfo}>
           <Text
@@ -27,7 +30,7 @@ export const Card = ({data}) => {
         </div>
       </div>
       <img className={style.img} src={data.thumbnail} />
-    </Text>
+    </Link>
   );
 };
 

@@ -1,0 +1,56 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.fullPage {
+  position: absolute;
+  width: 100%;
+}
+
+.fullImg {
+  height: 100vh;
+  width: 100%;
+}
+
+.fulPageInfo {
+  position: absolute;
+  display: flex;
+  color: #fff;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 14px;
+}
+
+.userName:hover {
+  transition: 0.7s all;
+  color: var(--reactColor);
+}
+
+.contentInfo {
+  display: grid;
+  margin-right: 20px;
+}
+
+.likeInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.countLike {
+  position: absolute;
+  color: #000;
+  font-weight: 900;
+}
+
+.likeInfo:hover .likes path {
+  fill: #e68888;
+}
+
+.likes path {
+  fill: #ffffff;
+  transition: 0.7s all;
+}
