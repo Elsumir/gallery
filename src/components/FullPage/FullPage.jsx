@@ -9,10 +9,12 @@ export const FullPage = () => {
   const {id} = useParams();
   const carts = useSelector((state) => state.data.data);
   const cart = carts.find((cart) => cart.id === id);
-  console.log(cart);
-  console.log(id);
-  console.log(style);
   const date = cart.date.split('T')[0];
+  const url = window.location.href.includes('cart');
+  if (url) {
+    document.body.style.overflow = 'hidden';
+  }
+
   return (
     <div className={style.overlay}>
       <div className={style.fullPage}>
@@ -31,7 +33,9 @@ export const FullPage = () => {
           </div>
           <div className={style.likeInfo}>
             <Heart className={style.likes} />
-            <span className={style.countLike}>{cart.likes}</span>
+            <Text As="a" className={style.countLike}>
+              {cart.likes}
+            </Text>
           </div>
         </div>
         <img className={style.fullImg} src={cart.fullImg} />

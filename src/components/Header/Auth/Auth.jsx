@@ -18,7 +18,7 @@ export const Auth = () => {
   const [btnClose, setBtnClose] = useState('dnone');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log(token);
+  const url = window.location.href.includes('cart');
 
   if (token) {
     dispatch(authRequestAsync(token));
@@ -34,11 +34,8 @@ export const Auth = () => {
 
   const back = () => {
     navigate(-1);
+    document.body.style.overflow = 'visible';
   };
-
-  const url = window.location.href.includes('cart');
-  // const toggleClass = url ? 'dnone' : 'logo';
-  console.log(url);
 
   return (
     <>

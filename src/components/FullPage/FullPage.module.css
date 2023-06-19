@@ -2,17 +2,21 @@
   position: fixed;
   inset: 0;
   z-index: 99;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.95);
+  display: flex;
+  justify-content: center;
 }
 
 .fullPage {
   position: absolute;
+}
+img {
   width: 100%;
+  object-fit: cover;
 }
 
 .fullImg {
   height: 100vh;
-  width: 100%;
 }
 
 .fulPageInfo {
@@ -46,6 +50,7 @@
 
 .countLike {
   position: absolute;
+  cursor: pointer;
   color: #000;
   font-weight: 900;
 }

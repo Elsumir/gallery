@@ -4,7 +4,6 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 
 export const authRequestAsync = createAsyncThunk('auth/fetch', (token, TK) => {
   // const token = TK.getState().token.token;
-  console.log(token);
 
   if (!token) return;
 

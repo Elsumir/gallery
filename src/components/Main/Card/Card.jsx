@@ -1,13 +1,10 @@
 import style from './Card.module.css';
 import {Text} from '../../../ui/Text';
 import PropTypes from 'prop-types';
-// import img from './img/notphoto.jpg';
 import {ReactComponent as Heart} from './img/24037.svg';
 import {Link} from 'react-router-dom';
-// .replaceAll(/a-z,A-Z/g, '')
 export const Card = ({data}) => {
   const date = data.date.split('T')[0];
-
   const id = data.id;
 
   return (

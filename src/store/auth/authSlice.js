@@ -17,7 +17,6 @@ export const authSlice = createSlice({
       state.error = '';
     },
     [authRequestAsync.fulfilled.type]: (state, action) => {
-      console.log(action);
       state.loading = false;
       state.name = action.payload;
       state.error = '';
