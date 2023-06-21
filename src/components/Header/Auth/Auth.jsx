@@ -5,24 +5,26 @@ import {urlAuth} from '../../../api/auth';
 import {useToken} from '../../../../src/hooks/useToken';
 import {useDispatch, useSelector} from 'react-redux';
 import {authRequestAsync} from '../../../store/auth/authAction';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {deleteToken} from '../../../store/token/tokenAction';
 import {useNavigate} from 'react-router-dom';
 
 export const Auth = () => {
-  useToken();
+  const name = useSelector((state) => state.auth.name);
 
   const token = useSelector((state) => state.token.token);
   // const loading = useSelector((state) => state.token.cullFunc);
-  const name = useSelector((state) => state.auth.name);
+
   const [btnClose, setBtnClose] = useState('dnone');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const url = window.location.href.includes('cart');
 
-  if (token) {
-    dispatch(authRequestAsync(token));
-  }
+  useEffect(() => {
+    dispatch(authRequestAsync());
+  }, [token]);
+
+  useToken(name);
 
   const delToken = (e) => {
     dispatch(deleteToken());

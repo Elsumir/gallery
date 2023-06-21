@@ -63,3 +63,7 @@ img {
   fill: #ffffff;
   transition: 0.7s all;
 }
+.likesActive path {
+  fill: #e68888;
+  transition: 0.7s all;
+}

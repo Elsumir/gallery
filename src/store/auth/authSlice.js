@@ -4,6 +4,7 @@ import {authRequestAsync} from './authAction';
 const initialState = {
   name: '',
   loading: false,
+  login: false,
   error: '',
 };
 
@@ -19,6 +20,7 @@ export const authSlice = createSlice({
     [authRequestAsync.fulfilled.type]: (state, action) => {
       state.loading = false;
       state.name = action.payload;
+      state.login = true;
       state.error = '';
     },
     [authRequestAsync.rejected.type]: (state, action) => {
