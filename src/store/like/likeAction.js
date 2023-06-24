@@ -6,19 +6,28 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 export const likeRequestAsync = createAsyncThunk('like/fetch', (id, TK) => {
   const token = TK.getState().token.token;
   const like = TK.getState().like.like;
-  // const {id} = useParams();
+
+  let booleanLike;
+
+  if (like) {
+    booleanLike = like.like;
+  }
 
   const url = new URL(`${API_URL}/photos/${id}/like`);
 
   return axios(`${url}`, {
-    method: like ? 'DELETE' : 'POST',
+    method: booleanLike ? 'DELETE' : 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
     },
   })
     .then(({data}) => {
       console.log(data);
-      return data.photo.liked_by_user;
+      const photoInfo = {
+        like: data.photo.liked_by_user,
+        countLike: data.photo.likes,
+      };
+      return photoInfo;
     })
     .catch((err) => {
       ({error: err});

@@ -10,15 +10,19 @@ const initialState = {
 export const likeSlice = createSlice({
   name: 'like',
   initialState,
-  reducers: {},
+  reducers: {
+    clearLike: (state, action) => {
+      state.loading = false;
+      state.like = '';
+      state.error = '';
+    },
+  },
   extraReducers: {
     [likeRequestAsync.pending.type]: (state) => {
       state.loading = true;
       state.error = '';
     },
     [likeRequestAsync.fulfilled.type]: (state, action) => {
-      console.log(state);
-      console.log(action);
       state.loading = false;
       state.like = action.payload;
       state.error = '';

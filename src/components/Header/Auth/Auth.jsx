@@ -2,15 +2,22 @@ import style from './Auth.module.css';
 import {Text} from '../../../ui/Text';
 import {ReactComponent as LoginIcon} from './img/login.svg';
 import {urlAuth} from '../../../api/auth';
-import {useToken} from '../../../../src/hooks/useToken';
+// import {useToken} from '../../../../src/hooks/useToken';
 import {useDispatch, useSelector} from 'react-redux';
 import {authRequestAsync} from '../../../store/auth/authAction';
 import {useEffect, useState} from 'react';
-import {deleteToken} from '../../../store/token/tokenAction';
+import {deleteToken, tokenReduceAsync} from '../../../store/token/tokenAction';
 import {useNavigate} from 'react-router-dom';
+import {likeSlice} from '../../../store/like/likeSlice';
 
 export const Auth = () => {
-  const name = useSelector((state) => state.auth.name);
+  const user = useSelector((state) => state.auth.name);
+
+  let name;
+
+  if (user) {
+    name = user.name;
+  }
 
   const token = useSelector((state) => state.token.token);
   // const loading = useSelector((state) => state.token.cullFunc);
@@ -21,10 +28,12 @@ export const Auth = () => {
   const url = window.location.href.includes('cart');
 
   useEffect(() => {
-    dispatch(authRequestAsync());
+    dispatch(tokenReduceAsync());
   }, [token]);
 
-  useToken(name);
+  useEffect(() => {
+    dispatch(authRequestAsync());
+  }, [token]);
 
   const delToken = (e) => {
     dispatch(deleteToken());
@@ -37,6 +46,7 @@ export const Auth = () => {
   const back = () => {
     navigate(-1);
     document.body.style.overflow = 'visible';
+    dispatch(likeSlice.actions.clearLike());
   };
 
   return (

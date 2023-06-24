@@ -9,8 +9,9 @@ import {FullPage} from './components/FullPage/FullPage';
 
 const App = () => {
   const dispatch = useDispatch();
-  dispatch(dataRequestAsync());
+
   dispatch(updateCode(getCode()));
+  dispatch(dataRequestAsync());
   return (
     <>
       <Routes>

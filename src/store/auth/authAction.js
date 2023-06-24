@@ -4,9 +4,8 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 
 export const authRequestAsync = createAsyncThunk('auth/fetch', (_, TK) => {
   const token = TK.getState().token.token;
-  const login = TK.getState().auth.login;
 
-  if (!token || login) return;
+  if (!token) return;
 
   const API_URL_PHOTOS = `${API_URL}/me`;
   const url = new URL(API_URL_PHOTOS);
@@ -17,7 +16,12 @@ export const authRequestAsync = createAsyncThunk('auth/fetch', (_, TK) => {
       Authorization: `Bearer ${token}`,
     },
   })
-    .then(({data}) => data.name)
+    .then(({data}) => {
+      const nik = data.username;
+      const name = data.name;
+      const user = {name, nik};
+      return user;
+    })
     .catch((err) => {
       ({error: err});
     });
