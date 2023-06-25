@@ -5,6 +5,7 @@ import dataReducer from './photos/photosSlice';
 import authSlice from './auth/authSlice';
 import likeSlice from './like/likeSlice';
 import myLikeSlice from './myLike/myLikeSlice';
+import fullPageSlice from './fullPage/fullPageSlice';
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     auth: authSlice,
     like: likeSlice,
     myLike: myLikeSlice,
+    fullPage: fullPageSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(tokenMiddleware),

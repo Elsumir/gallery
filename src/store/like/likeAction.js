@@ -5,12 +5,12 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 
 export const likeRequestAsync = createAsyncThunk('like/fetch', (id, TK) => {
   const token = TK.getState().token.token;
-  const like = TK.getState().like.like;
+  const likes = TK.getState().fullPage.page;
 
   let booleanLike;
 
-  if (like) {
-    booleanLike = like.like;
+  if (likes) {
+    booleanLike = likes.liked_by_user;
   }
 
   const url = new URL(`${API_URL}/photos/${id}/like`);

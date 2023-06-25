@@ -5,59 +5,39 @@ import {Text} from '../../ui/Text';
 import {ReactComponent as Heart} from '../Main/Card/img/24037.svg';
 import {useDispatch, useSelector} from 'react-redux';
 import {likeRequestAsync} from '../../store/like/likeAction';
-import {myLikeRequestAsync} from '../../store/myLike/myLikeAction';
 import {useEffect} from 'react';
+import {fullPageRequestAsync} from '../../store/fullPage/fullPageAction';
 
 export const FullPage = () => {
   const {id} = useParams();
   const carts = useSelector((state) => state.data.data);
-  const like = useSelector((state) => state.like.like);
-  const myLike = useSelector((state) => state.myLike.myLike);
   const token = useSelector((state) => state.token.token);
-  const user = useSelector((state) => state.auth.name);
+  const trueLike = useSelector((state) => state.fullPage.page);
   const cart = carts.find((cart) => cart.id === id);
   const date = cart.date.split('T')[0];
   const url = window.location.href.includes('cart');
   const dispatch = useDispatch();
 
-  let yesLike;
-  // let givenObject = [];
-  let nik;
-  let incLike;
-  let incCount;
+  let trueMyLike;
+  let trueCount;
 
-  let countLike;
-
-  if (like) {
-    countLike = like.countLike;
-    yesLike = like.like;
+  if (trueLike) {
+    trueCount = trueLike.likes;
+    trueMyLike = trueLike.liked_by_user;
   }
 
-  console.log(countLike);
-
-  if (user) {
-    nik = user.nik;
-  }
-
-  if (myLike) {
-    incLike = myLike.map((e) => e.id).includes(id);
-    incCount = myLike.find((obj) => obj.id === id);
-  }
-
-  console.log(incCount);
-
-  const likes = yesLike || incLike ? 'likesActive' : 'likes';
+  const likes = trueMyLike ? 'likesActive' : 'likes';
 
   useEffect(() => {
     if (token) {
-      dispatch(myLikeRequestAsync(nik));
+      dispatch(fullPageRequestAsync(id));
     }
   }, [token]);
 
   const toggleLike = () => {
     if (token) {
       dispatch(likeRequestAsync(id));
-      dispatch(myLikeRequestAsync(nik));
+      dispatch(fullPageRequestAsync(id));
     } else {
       alert('авторизуйтесь');
     }
@@ -86,7 +66,7 @@ export const FullPage = () => {
           <div className={style.likeInfo}>
             <Heart className={style[likes]} />
             <Text onClick={toggleLike} className={style.countLike}>
-              {like ? countLike : cart.likes}
+              {trueLike ? trueCount : cart.likes}
             </Text>
           </div>
         </div>
