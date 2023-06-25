@@ -12,8 +12,9 @@ export const FullPage = () => {
   const {id} = useParams();
   const carts = useSelector((state) => state.data.data);
   const token = useSelector((state) => state.token.token);
-  const like = useSelector((state) => state.like.like);
+  // const like = useSelector((state) => state.like.like);
   const trueLike = useSelector((state) => state.fullPage.page);
+  const loading = useSelector((state) => state.fullPage.loading);
   const cart = carts.find((cart) => cart.id === id);
   const date = cart.date.split('T')[0];
   const url = window.location.href.includes('cart');
@@ -21,18 +22,13 @@ export const FullPage = () => {
 
   let trueMyLike;
   let trueCount;
-  let yesLike;
-
-  if (like) {
-    yesLike = like.like;
-  }
 
   if (trueLike) {
     trueCount = trueLike.likes;
     trueMyLike = trueLike.liked_by_user;
   }
 
-  const likes = trueMyLike || yesLike ? 'likesActive' : 'likes';
+  const likes = trueMyLike ? 'likesActive' : 'likes';
 
   useEffect(() => {
     if (token) {
@@ -42,8 +38,8 @@ export const FullPage = () => {
 
   const toggleLike = () => {
     if (token) {
-      dispatch(likeRequestAsync(id));
       dispatch(fullPageRequestAsync(id));
+      dispatch(likeRequestAsync(id));
     } else {
       alert('авторизуйтесь');
     }
@@ -72,7 +68,7 @@ export const FullPage = () => {
           <div className={style.likeInfo}>
             <Heart className={style[likes]} />
             <Text onClick={toggleLike} className={style.countLike}>
-              {trueLike ? trueCount : cart.likes}
+              {!token ? cart.likes : loading ? '' : trueCount}
             </Text>
           </div>
         </div>
