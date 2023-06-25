@@ -12,6 +12,7 @@ export const FullPage = () => {
   const {id} = useParams();
   const carts = useSelector((state) => state.data.data);
   const token = useSelector((state) => state.token.token);
+  const like = useSelector((state) => state.like.like);
   const trueLike = useSelector((state) => state.fullPage.page);
   const cart = carts.find((cart) => cart.id === id);
   const date = cart.date.split('T')[0];
@@ -20,13 +21,18 @@ export const FullPage = () => {
 
   let trueMyLike;
   let trueCount;
+  let yesLike;
+
+  if (like) {
+    yesLike = like.like;
+  }
 
   if (trueLike) {
     trueCount = trueLike.likes;
     trueMyLike = trueLike.liked_by_user;
   }
 
-  const likes = trueMyLike ? 'likesActive' : 'likes';
+  const likes = trueMyLike || yesLike ? 'likesActive' : 'likes';
 
   useEffect(() => {
     if (token) {
