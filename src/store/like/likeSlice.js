@@ -13,7 +13,7 @@ export const likeSlice = createSlice({
   reducers: {
     clearLike: (state, action) => {
       state.loading = false;
-      state.like = '';
+      state.like = 'undefined';
       state.error = '';
     },
   },

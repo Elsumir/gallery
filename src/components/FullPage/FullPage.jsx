@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 import {useParams} from 'react-router-dom';
 import style from './FullPage.module.css';
 import {Header} from '../Header/Header';
@@ -12,23 +13,14 @@ export const FullPage = () => {
   const {id} = useParams();
   const carts = useSelector((state) => state.data.data);
   const token = useSelector((state) => state.token.token);
-  // const like = useSelector((state) => state.like.like);
+  const like = useSelector((state) => state.like.like);
+  const loading = useSelector((state) => state.like.loading);
   const trueLike = useSelector((state) => state.fullPage.page);
-  const loading = useSelector((state) => state.fullPage.loading);
+  // const loading = useSelector((state) => state.fullPage.loading);
   const cart = carts.find((cart) => cart.id === id);
   const date = cart.date.split('T')[0];
   const url = window.location.href.includes('cart');
   const dispatch = useDispatch();
-
-  let trueMyLike;
-  let trueCount;
-
-  if (trueLike) {
-    trueCount = trueLike.likes;
-    trueMyLike = trueLike.liked_by_user;
-  }
-
-  const likes = trueMyLike ? 'likesActive' : 'likes';
 
   useEffect(() => {
     if (token) {
@@ -38,16 +30,61 @@ export const FullPage = () => {
 
   const toggleLike = () => {
     if (token) {
-      dispatch(fullPageRequestAsync(id));
       dispatch(likeRequestAsync(id));
     } else {
       alert('авторизуйтесь');
     }
   };
 
+  let trueMyLike;
+  let trueCount;
+  let newLikeCount;
+  let newLike = '';
+
+  if (like) {
+    newLikeCount = like.countLike;
+    newLike = like.like;
+    // bool = like.bool;
+  }
+  if (trueLike) {
+    trueCount = trueLike.likes;
+    trueMyLike = trueLike.liked_by_user;
+  }
+
+  console.log(typeof newLike);
+
+  const likes = () => {
+    let result;
+    if (newLike === undefined || newLike === '') {
+      result = trueMyLike ? 'likesActive' : 'likes';
+    } else {
+      result = newLike ? 'likesActive' : 'likes';
+    }
+
+    return result;
+  };
+  const count = () => {
+    let result;
+    if (newLike === undefined || newLike === '') {
+      result = trueMyLike ? trueCount : cart.likes;
+    } else {
+      result = newLike ? newLikeCount : cart.likes;
+    }
+
+    return result;
+  };
+
+  console.log('likes ', likes());
+
   if (url) {
     document.body.style.overflow = 'hidden';
   }
+
+  console.log('trueMyLike', trueMyLike);
+  console.log('trueCount', trueCount);
+  console.log('newLike', like.like);
+  console.log('countLike', like.countLike);
+  console.log('cart.likes', cart.likes);
 
   return (
     <div className={style.overlay}>
@@ -66,9 +103,9 @@ export const FullPage = () => {
             <Text className={style.date}>{date}</Text>
           </div>
           <div className={style.likeInfo}>
-            <Heart className={style[likes]} />
+            <Heart className={style[likes()]} />
             <Text onClick={toggleLike} className={style.countLike}>
-              {!token ? cart.likes : loading ? '' : trueCount}
+              {!token ? cart.likes : loading ? '' : count()}
             </Text>
           </div>
         </div>

@@ -44,7 +44,7 @@ export const Auth = () => {
   };
 
   const back = () => {
-    navigate(-1);
+    navigate(`/`);
     document.body.style.overflow = 'visible';
     dispatch(likeSlice.actions.clearLike());
   };
