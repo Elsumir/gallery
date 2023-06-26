@@ -7,7 +7,7 @@ export const dataRequestAsync = createAsyncThunk(
   (page = 1, TK) => {
     const token = TK.getState().token.token;
 
-    const API_URL_PHOTOS = `${API_URL}/photos?page=${page}&per_page=10`;
+    const API_URL_PHOTOS = `${API_URL}/photos?page=${page}&per_page=30`;
     const url = new URL(API_URL_PHOTOS);
     url.searchParams.set('client_id', ACCESS_KEY);
 
