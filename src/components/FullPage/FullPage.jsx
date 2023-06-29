@@ -39,11 +39,13 @@ export const FullPage = () => {
   let trueMyLike;
   let trueCount;
   let newLikeCount;
+  let likeId;
   let newLike = '';
 
   if (like) {
     newLikeCount = like.countLike;
     newLike = like.like;
+    likeId = like.bool;
     // bool = like.bool;
   }
   if (trueLike) {
@@ -66,9 +68,9 @@ export const FullPage = () => {
   const count = () => {
     let result;
     if (newLike === undefined || newLike === '') {
-      result = trueMyLike ? trueCount : cart.likes;
+      result = trueLike ? trueCount : cart.likes;
     } else {
-      result = newLike ? newLikeCount : cart.likes;
+      result = likeId === id ? newLikeCount : cart.likes;
     }
 
     return result;
@@ -85,6 +87,7 @@ export const FullPage = () => {
   console.log('newLike', like.like);
   console.log('countLike', like.countLike);
   console.log('cart.likes', cart.likes);
+  console.log('like', like);
 
   return (
     <div className={style.overlay}>

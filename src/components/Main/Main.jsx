@@ -3,11 +3,14 @@ import {Card} from './Card/Card';
 import style from './Main.module.css';
 import {useDispatch, useSelector} from 'react-redux';
 import {dataRequestAsync} from '../../store/photos/photosActions';
+
 export const Main = () => {
   const data = useSelector((state) => state.data.data);
+
+  const dispatch = useDispatch();
+
   const endCart = useRef(null);
   let page = 1;
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!data.length) return;

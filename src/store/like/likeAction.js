@@ -42,11 +42,11 @@ export const likeRequestAsync = createAsyncThunk('like/fetch', (id, TK) => {
     },
   })
     .then(({data}) => {
-      console.log(booleanLike);
+      console.log(data);
       const photoInfo = {
         like: data.photo.liked_by_user,
         countLike: data.photo.likes,
-        bool: booleanLike,
+        bool: data.photo.id,
       };
       return photoInfo;
     })

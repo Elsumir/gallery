@@ -9,6 +9,7 @@ import {useEffect, useState} from 'react';
 import {deleteToken, tokenReduceAsync} from '../../../store/token/tokenAction';
 import {useNavigate} from 'react-router-dom';
 import {likeSlice} from '../../../store/like/likeSlice';
+import {myLikeRequestAsync} from '../../../store/myLike/myLikeAction';
 
 export const Auth = () => {
   const user = useSelector((state) => state.auth.name);
@@ -47,6 +48,9 @@ export const Auth = () => {
     navigate(`/`);
     document.body.style.overflow = 'visible';
     dispatch(likeSlice.actions.clearLike());
+    if (token) {
+      dispatch(myLikeRequestAsync());
+    }
   };
 
   return (

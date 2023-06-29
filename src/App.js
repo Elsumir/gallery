@@ -12,6 +12,7 @@ const App = () => {
 
   dispatch(updateCode(getCode()));
   dispatch(dataRequestAsync());
+
   return (
     <>
       <Routes>

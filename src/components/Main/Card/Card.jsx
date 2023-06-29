@@ -1,11 +1,24 @@
+/* eslint-disable operator-linebreak */
 import style from './Card.module.css';
 import {Text} from '../../../ui/Text';
 import PropTypes from 'prop-types';
 import {ReactComponent as Heart} from './img/24037.svg';
 import {Link} from 'react-router-dom';
+import {useSelector} from 'react-redux';
+
 export const Card = ({data}) => {
-  const date = data.date.split('T')[0];
   const id = data.id;
+  const myLike = useSelector((state) => state.myLike.myLike);
+  const date = data.date.split('T')[0];
+
+  let likes = data.likes;
+
+  if (myLike) {
+    const obl = myLike.find((e) => e.id === id);
+    if (obl) {
+      likes = obl.totalLike;
+    }
+  }
 
   return (
     <Link className={style.linkImage} to={`/cart/${id}`}>
@@ -23,7 +36,7 @@ export const Card = ({data}) => {
         </div>
         <div className={style.likeInfo}>
           <Heart className={style.likes} />
-          <span className={style.countLike}>{data.likes}</span>
+          <span className={style.countLike}>{likes}</span>
         </div>
       </div>
       <img className={style.img} src={data.thumbnail} />
