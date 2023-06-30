@@ -69,18 +69,3 @@ export const tokenMiddleware = (store) => (next) => (action) => {
   }
   next(action);
 };
-
-// export const tokenRequestAsync = createAsyncThunk('token/fetch', (_, TK) => {
-//   console.log();
-//   return axios(`${urlToken}`, {
-//     method: 'POST',
-//   })
-//     .then(({data}) => {
-//       const token = data.access_token;
-//       setToken(token);
-//       return token;
-//     })
-//     .catch((err) => {
-//       console.err(err.message);
-//     });
-// });

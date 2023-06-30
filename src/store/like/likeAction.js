@@ -1,7 +1,6 @@
 import {API_URL} from '../../api/const';
 import axios from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-// import {useParams} from 'react-router-dom';
 
 export const likeRequestAsync = createAsyncThunk('like/fetch', (id, TK) => {
   const token = TK.getState().token.token;
@@ -31,8 +30,6 @@ export const likeRequestAsync = createAsyncThunk('like/fetch', (id, TK) => {
 
   const booleanLike = count();
 
-  console.log('bool', booleanLike);
-
   const url = new URL(`${API_URL}/photos/${id}/like`);
 
   return axios(`${url}`, {
@@ -42,7 +39,6 @@ export const likeRequestAsync = createAsyncThunk('like/fetch', (id, TK) => {
     },
   })
     .then(({data}) => {
-      console.log(data);
       const photoInfo = {
         like: data.photo.liked_by_user,
         countLike: data.photo.likes,

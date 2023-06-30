@@ -17,8 +17,6 @@ export const myLikeSlice = createSlice({
       state.error = '';
     },
     [myLikeRequestAsync.fulfilled.type]: (state, action) => {
-      console.log(state);
-      console.log(action);
       state.loading = false;
       state.myLike = action.payload;
       state.error = '';

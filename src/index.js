@@ -14,5 +14,3 @@ root.render(
     </BrowserRouter>
   </Provider>
 );
-
-// store={store}

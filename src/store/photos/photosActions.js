@@ -16,9 +16,8 @@ export const dataRequestAsync = createAsyncThunk(
         Authorization: `bearer ${token}`,
       },
     })
-      .then(({data}) => {
-        console.log(data);
-        return data.map((e) => {
+      .then(({data}) =>
+        data.map((e) => {
           const card = {
             id: e.id,
             date: e.created_at,
@@ -30,8 +29,8 @@ export const dataRequestAsync = createAsyncThunk(
             userName: e.user.name,
           };
           return card;
-        });
-      })
+        })
+      )
       .catch((err) => {
         ({error: err});
       });

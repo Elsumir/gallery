@@ -16,7 +16,6 @@ export const FullPage = () => {
   const like = useSelector((state) => state.like.like);
   const loading = useSelector((state) => state.like.loading);
   const trueLike = useSelector((state) => state.fullPage.page);
-  // const loading = useSelector((state) => state.fullPage.loading);
   const cart = carts.find((cart) => cart.id === id);
   const date = cart.date.split('T')[0];
   const url = window.location.href.includes('cart');
@@ -46,14 +45,11 @@ export const FullPage = () => {
     newLikeCount = like.countLike;
     newLike = like.like;
     likeId = like.bool;
-    // bool = like.bool;
   }
   if (trueLike) {
     trueCount = trueLike.likes;
     trueMyLike = trueLike.liked_by_user;
   }
-
-  console.log(typeof newLike);
 
   const likes = () => {
     let result;
@@ -76,18 +72,9 @@ export const FullPage = () => {
     return result;
   };
 
-  console.log('likes ', likes());
-
   if (url) {
     document.body.style.overflow = 'hidden';
   }
-
-  console.log('trueMyLike', trueMyLike);
-  console.log('trueCount', trueCount);
-  console.log('newLike', like.like);
-  console.log('countLike', like.countLike);
-  console.log('cart.likes', cart.likes);
-  console.log('like', like);
 
   return (
     <div className={style.overlay}>

@@ -16,5 +16,3 @@ searchParams.append('code', CODE);
 searchParams.append('grant_type', GRANT_TYPE);
 
 export const urlToken = `${API_URL_TOKEN}${searchParams.toString()}`;
-
-console.log(CODE.length);
