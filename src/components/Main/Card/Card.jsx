@@ -21,26 +21,31 @@ export const Card = ({data}) => {
   }
 
   return (
-    <Link className={style.linkImage} to={`/cart/${id}`}>
-      <div className={style.content}>
-        <div className={style.userInfo}>
-          <Text
-            As="a"
-            target="_blank"
-            href={data.address}
-            className={style.userName}
-          >
-            {data.userName}
-          </Text>
-          <Text className={style.date}>{date}</Text>
+    <>
+      <div className={style.wrapper}>
+        <div className={style.content}>
+          <div className={style.userInfo}>
+            <Text
+              As="a"
+              target="_blank"
+              href={data.address}
+              className={style.userName}
+            >
+              {data.userName}
+            </Text>
+            <Text className={style.date}>{date}</Text>
+          </div>
+          <div className={style.likeInfo}>
+            <Heart className={style.likes} />
+            <span className={style.countLike}>{likes}</span>
+          </div>
         </div>
-        <div className={style.likeInfo}>
-          <Heart className={style.likes} />
-          <span className={style.countLike}>{likes}</span>
-        </div>
+
+        <Link className={style.linkImage} to={`/cart/${id}`}>
+          <img className={style.img} src={data.thumbnail} />
+        </Link>
       </div>
-      <img className={style.img} src={data.thumbnail} />
-    </Link>
+    </>
   );
 };
 
