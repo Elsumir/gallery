@@ -5,6 +5,7 @@ const initialState = {
   error: '',
   like: '',
   loading: false,
+  status: '',
 };
 
 export const likeSlice = createSlice({
@@ -25,6 +26,7 @@ export const likeSlice = createSlice({
     [likeRequestAsync.fulfilled.type]: (state, action) => {
       state.loading = false;
       state.like = action.payload;
+      state.status = !action.payload ? alert('Что-то пошло не так') : '';
       state.error = '';
     },
     [likeRequestAsync.rejected.type]: (state, action) => {

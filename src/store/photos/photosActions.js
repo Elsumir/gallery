@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+/* eslint-disable operator-linebreak */
 import {API_URL, ACCESS_KEY} from '../../api/const';
 import axios from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
@@ -16,23 +18,26 @@ export const dataRequestAsync = createAsyncThunk(
         Authorization: `bearer ${token}`,
       },
     })
-      .then(({data}) =>
-        data.map((e) => {
-          const card = {
-            id: e.id,
-            date: e.created_at,
-            address: e.user.links.html,
-            likes: e.likes,
-            thumbnail: e.urls.regular,
-            fullImg: e.urls.full,
-            myLike: e.liked_by_user,
-            userName: e.user.name,
-          };
-          return card;
-        })
-      )
+      .then(({data, status}) => {
+        console.log();
+        return status === 403
+          ? status
+          : data.map((e) => {
+              const card = {
+                id: e.id,
+                date: e.created_at,
+                address: e.user.links.html,
+                likes: e.likes,
+                thumbnail: e.urls.regular,
+                fullImg: e.urls.full,
+                myLike: e.liked_by_user,
+                userName: e.user.name,
+              };
+              return card;
+            });
+      })
       .catch((err) => {
-        ({error: err});
+        console.log(err.message);
       });
   }
 );

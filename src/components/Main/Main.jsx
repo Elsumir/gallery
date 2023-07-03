@@ -3,9 +3,11 @@ import {Card} from './Card/Card';
 import style from './Main.module.css';
 import {useDispatch, useSelector} from 'react-redux';
 import {dataRequestAsync} from '../../store/photos/photosActions';
+import {ErrorPage} from '../ErrorPage/ErrorPage';
 
 export const Main = () => {
   const data = useSelector((state) => state.data.data);
+  const status = useSelector((state) => state.data.status);
 
   const dispatch = useDispatch();
 
@@ -31,12 +33,18 @@ export const Main = () => {
 
   return (
     <>
-      <div className={style.gallery}>
-        {data.map((data) => (
-          <Card key={data.id} data={data} />
-        ))}
-        <div ref={endCart} className={style.end}></div>
-      </div>
+      {status ? (
+        <ErrorPage />
+      ) : (
+        <>
+          <div className={style.gallery}>
+            {data.map((data) => (
+              <Card key={data.id} data={data} />
+            ))}
+            <div ref={endCart} className={style.end}></div>
+          </div>
+        </>
+      )}
     </>
   );
 };

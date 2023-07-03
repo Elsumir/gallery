@@ -8,18 +8,22 @@ import {useDispatch, useSelector} from 'react-redux';
 import {likeRequestAsync} from '../../store/like/likeAction';
 import {useEffect} from 'react';
 import {fullPageRequestAsync} from '../../store/fullPage/fullPageAction';
+import {ErrorPage} from '../ErrorPage/ErrorPage';
 
 export const FullPage = () => {
   const {id} = useParams();
   const carts = useSelector((state) => state.data.data);
+  const status = useSelector((state) => state.data.status);
   const token = useSelector((state) => state.token.token);
   const like = useSelector((state) => state.like.like);
-  const loading = useSelector((state) => state.like.loading);
+  // const status = useSelector((state) => state.like.status);
   const trueLike = useSelector((state) => state.fullPage.page);
+  const load = useSelector((state) => state.fullPage.loading);
   const cart = carts.find((cart) => cart.id === id);
-  const date = cart.date.split('T')[0];
   const url = window.location.href.includes('cart');
   const dispatch = useDispatch();
+
+  const date = cart.date ? cart.date.split('T')[0] : cart.date;
 
   useEffect(() => {
     if (token) {
@@ -53,6 +57,7 @@ export const FullPage = () => {
 
   const likes = () => {
     let result;
+    if (load) return;
     if (newLike === undefined || newLike === '') {
       result = trueMyLike ? 'likesActive' : 'likes';
     } else {
@@ -63,6 +68,7 @@ export const FullPage = () => {
   };
   const count = () => {
     let result;
+    if (load) return;
     if (newLike === undefined || newLike === '') {
       result = trueLike ? trueCount : cart.likes;
     } else {
@@ -77,30 +83,36 @@ export const FullPage = () => {
   }
 
   return (
-    <div className={style.overlay}>
-      <div className={style.fullPage}>
-        <Header />
-        <div className={style.fulPageInfo}>
-          <div className={style.contentInfo}>
-            <Text
-              className={style.userName}
-              As="a"
-              target="_blank"
-              href={cart.address}
-            >
-              {cart.userName}
-            </Text>
-            <Text className={style.date}>{date}</Text>
-          </div>
-          <div className={style.likeInfo}>
-            <Heart className={style[likes()]} />
-            <Text onClick={toggleLike} className={style.countLike}>
-              {!token ? cart.likes : loading ? '' : count()}
-            </Text>
+    <>
+      {status ? (
+        <ErrorPage />
+      ) : (
+        <div className={style.overlay}>
+          <div className={style.fullPage}>
+            <Header />
+            <div className={style.fulPageInfo}>
+              <div className={style.contentInfo}>
+                <Text
+                  className={style.userName}
+                  As="a"
+                  target="_blank"
+                  href={cart.address}
+                >
+                  {cart.userName}
+                </Text>
+                <Text className={style.date}>{date}</Text>
+              </div>
+              <div className={style.likeInfo}>
+                <Heart className={style[likes()]} />
+                <Text onClick={toggleLike} className={style.countLike}>
+                  {!token ? cart.likes : load ? '' : count()}
+                </Text>
+              </div>
+            </div>
+            <img className={style.fullImg} src={cart.fullImg} />
           </div>
         </div>
-        <img className={style.fullImg} src={cart.fullImg} />
-      </div>
-    </div>
+      )}
+    </>
   );
 };
