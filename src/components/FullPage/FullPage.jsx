@@ -101,7 +101,7 @@ export const FullPage = () => {
                 >
                   {cart.userName}
                 </Text>
-                <Text className={style.date}>{date}</Text>
+                <Text className={style.date}>{date ? date : ''}</Text>
               </div>
               <div className={style.likeInfo}>
                 <Heart className={style[likes()]} />
