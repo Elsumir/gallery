@@ -23,7 +23,7 @@ export const FullPage = () => {
   const url = window.location.href.includes('cart');
   const dispatch = useDispatch();
 
-  const date = cart.date ? cart.date.split('T')[0] : '';
+  const date = cart ? cart.date.split('T')[0] : '';
 
   console.log(date);
   useEffect(() => {
