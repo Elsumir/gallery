@@ -85,7 +85,7 @@ export const FullPage = () => {
 
   return (
     <>
-      {status ? (
+      {status || !cart ? (
         <ErrorPage />
       ) : (
         <div className={style.overlay}>
