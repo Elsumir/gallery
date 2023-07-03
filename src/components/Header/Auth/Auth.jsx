@@ -59,7 +59,7 @@ export const Auth = () => {
         </Text>
       ) : token ? (
         <>
-          <Text As="a" onClick={toggleBtn} className={style.authName}>
+          <Text onClick={toggleBtn} className={style.authName}>
             {name}
 
             <button onClick={delToken} className={style[btnClose]}>
