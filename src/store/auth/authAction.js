@@ -11,7 +11,7 @@ export const authRequestAsync = createAsyncThunk('auth/fetch', (_, TK) => {
   const url = new URL(API_URL_PHOTOS);
   url.searchParams.set('client_id', ACCESS_KEY);
 
-  return axios(`${url}`, {
+  return axios(`${url}11`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

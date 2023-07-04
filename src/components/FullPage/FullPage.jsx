@@ -25,7 +25,6 @@ export const FullPage = () => {
 
   const date = cart ? cart.date.split('T')[0] : '';
 
-  console.log(date);
   useEffect(() => {
     if (token) {
       dispatch(fullPageRequestAsync(id));

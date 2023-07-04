@@ -28,7 +28,7 @@ export const dataSlice = createSlice({
       state.status = action.payload === undefined ? true : '';
     },
     [dataRequestAsync.rejected.type]: (state, action) => {
-      state.error = action.payload.error;
+      state.error = action.error.message;
       state.loading = false;
     },
   },

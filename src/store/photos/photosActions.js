@@ -13,14 +13,14 @@ export const dataRequestAsync = createAsyncThunk(
     const url = new URL(API_URL_PHOTOS);
     url.searchParams.set('client_id', ACCESS_KEY);
 
-    return axios(`${url}`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-      },
-    })
-      .then(({data, status}) => {
+    try {
+      return axios(`${url}`, {
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      }).then(({data, status}) => {
         console.log();
-        return status === 403
+        return status === 404
           ? status
           : data.map((e) => {
               const card = {
@@ -35,9 +35,10 @@ export const dataRequestAsync = createAsyncThunk(
               };
               return card;
             });
-      })
-      .catch((err) => {
-        console.log(err.message);
       });
+    } catch (err) {
+      console.log(err);
+      return err.message;
+    }
   }
 );

@@ -7,7 +7,7 @@ import {ErrorPage} from '../ErrorPage/ErrorPage';
 
 export const Main = () => {
   const data = useSelector((state) => state.data.data);
-  const status = useSelector((state) => state.data.status);
+  const error = useSelector((state) => state.data.error);
 
   const dispatch = useDispatch();
 
@@ -33,7 +33,7 @@ export const Main = () => {
 
   return (
     <>
-      {status ? (
+      {error ? (
         <ErrorPage />
       ) : (
         <>
